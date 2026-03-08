@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For You ❤️</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #ffe4ec, #fff6f9);
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 700px;
+      padding: 40px 20px 50px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: 56px;
+      color: #c2185b;
+      line-height: 1.1;
+    }
+
+    p {
+      margin: 0 auto 28px;
+      max-width: 520px;
+      font-size: 20px;
+      line-height: 1.5;
+      color: #7a3658;
+    }
+
+    button {
+      border: none;
+      background: #e91e63;
+      color: white;
+      padding: 18px 34px;
+      border-radius: 999px;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.04);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.16);
+    }
+
+    .bouquet-wrap {
+      display: none;
+      margin-top: 34px;
+      animation: fadeUp 1s ease forwards;
+    }
+
+    .bouquet-card {
+      display: inline-block;
+      padding: 22px 22px 14px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.38);
+      box-shadow:
+        0 18px 40px rgba(194, 24, 91, 0.10),
+        inset 0 1px 0 rgba(255,255,255,0.45);
+      backdrop-filter: blur(6px);
+    }
+
+    .bouquet {
+      display: block;
+      width: min(320px, 78vw);
+      max-width: 100%;
+      opacity: 0;
+      transform: scale(0.82) translateY(20px);
+      animation: bloom 1.2s ease forwards;
+      filter: drop-shadow(0 12px 18px rgba(0,0,0,0.12));
+      border-radius: 18px;
+    }
+
+    .message {
+      display: none;
+      margin-top: 24px;
+      font-size: 21px;
+      line-height: 1.5;
+      color: #ad1457;
+      animation: fadeUp 1.2s ease forwards;
+    }
+
+    .petal {
+      position: fixed;
+      top: -30px;
+      font-size: 22px;
+      opacity: 0;
+      pointer-events: none;
+      animation: fall linear forwards;
+    }
+
+    @keyframes bloom {
+      0% {
+        opacity: 0;
+        transform: scale(0.82) translateY(20px);
+      }
+      60% {
+        opacity: 1;
+        transform: scale(1.04) translateY(0);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(280deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 42px;
+      }
+
+      p {
+        font-size: 18px;
+      }
+
+      button {
+        font-size: 18px;
+        padding: 16px 28px;
+      }
+
+      .message {
+        font-size: 19px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sretan 8. Mart ljubavi ❤️</h1>
+    <p>
+      Ne mogu ti dati uživo buket,<br>
+      pa sam ti napravio malu zamjenu, od srca.
+    </p>
+
+    <button id="openBtn" onclick="showBouquet()"> Otvori 💐</button>
+
+    <div class="bouquet-wrap" id="bouquetWrap">
+      <div class="bouquet-card">
+        <img src="bouquet.png" alt="Bouquet for you" class="bouquet">
+      </div>
+    </div>
+
+    <div class="message" id="message">
+      Ni jedna daljina me ne može spriječiti da te volim.<br>
+      Bit ćeš moja jedina svakog 8. Marta i svakog dana do kraja života. ❤️
+    </div>
+  </div>
+
+  <script>
+    function createPetals() {
+      for (let i = 0; i < 14; i++) {
+        const petal = document.createElement("div");
+        petal.className = "petal";
+        petal.textContent = Math.random() > 0.5 ? "🌸" : "❤";
+        petal.style.left = Math.random() * 100 + "vw";
+        petal.style.animationDuration = (4 + Math.random() * 3) + "s";
+        petal.style.animationDelay = (Math.random() * 1.5) + "s";
+        document.body.appendChild(petal);
+
+        setTimeout(() => petal.remove(), 8000);
+      }
+    }
+
+    function showBouquet() {
+      document.getElementById("bouquetWrap").style.display = "block";
+      document.getElementById("message").style.display = "block";
+      document.getElementById("openBtn").style.opacity = "0.92";
+      createPetals();
+    }
+  </script>
+</body>
+</html>
